@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Upload & Filter</title>
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #000;  /* Add borders between rows and columns */
+            padding: 10px;
+        }
+        .grouped {
+            background-color: #f0f0f0; /* Highlight grouped rows */
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload and Filter Excel File</h1>
+    <form id="uploadForm" enctype="multipart/form-data" method="POST" action="upload.php">
+        <input type="file" name="excelFile" id="excelFile" accept=".xlsx, .xls" required />
+        <button type="submit">Upload</button>
+    </form>
+    
+    <div id="filterSection" style="display:none;">
+        <h2>Select Columns to Display</h2>
+        <div id="filterOptions"></div> <!-- Filter checkboxes will be generated here -->
+        <button id="applyFilter">Apply Filter</button>
+        <button id="sendEmail">Send Email</button>
+        <button id="previewEmail">Preview Email</button>
+    </div>
+
+    <div id="tableSection">
+        <h2>Excel Data</h2>
+        <table id="excelTable">
+            <thead id="tableHead"></thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
