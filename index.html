@@ -3,45 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Excel Upload & Filter</title>
-    <link rel="stylesheet" href="assets/styles.css">
+    <title>Homepage</title>
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-        th, td {
-            border: 1px solid #000;  /* Add borders between rows and columns */
-            padding: 10px;
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
-        .grouped {
-            background-color: #f0f0f0; /* Highlight grouped rows */
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            color: #2c3e50;
+        }
+        .button {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            color: white;
+            background-color: #3498db;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #2980b9;
         }
     </style>
 </head>
 <body>
-    <h1>Upload and Filter Excel File</h1>
-    <form id="uploadForm" enctype="multipart/form-data" method="POST" action="upload.php">
-        <input type="file" name="excelFile" id="excelFile" accept=".xlsx, .xls" required />
-        <button type="submit">Upload</button>
-    </form>
+    <div class="container">
+        <h1>Welcome to Our Service</h1>
+        <a href="offer.html" class="button">Offer</a>
+        <a href="confirmation.html" class="button">Confirmation</a>
+        <a href="bid.html" class="button">Bid</a>
+    </div>
+    <script>
+        // Check if the user is logged in
+        const isLoggedIn = localStorage.getItem('loggedIn');
     
-    <div id="filterSection" style="display:none;">
-        <h2>Select Columns to Display</h2>
-        <div id="filterOptions"></div> <!-- Filter checkboxes will be generated here -->
-        <button id="applyFilter">Apply Filter</button>
-        <button id="sendEmail">Send Email</button>
-        <button id="previewEmail">Preview Email</button>
-    </div>
+        // If not logged in, redirect to login.html
+        if (!isLoggedIn) {
+            window.location.href = 'login.html';
+        }
 
-    <div id="tableSection">
-        <h2>Excel Data</h2>
-        <table id="excelTable">
-            <thead id="tableHead"></thead>
-            <tbody id="tableBody"></tbody>
-        </table>
-    </div>
-
-    <script src="script.js"></script>
+        // Logout function to clear login status and redirect to login page
+        function logout() {
+            localStorage.removeItem('loggedIn');
+            window.location.href = 'login.html';
+        }
+    </script>
 </body>
 </html>

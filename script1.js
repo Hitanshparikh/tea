@@ -35,21 +35,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 console.log("Raw rows from the server: ", rows); // Debug: Check raw rows
 
-                // Grouping rows by the 4th column (index 3)
-                const groupedRows = groupRowsByColumn(rows, 3); 
+                // Grouping rows by the 2nd column (index 1)
+                const groupedRows = groupRowsByColumn(rows, 1); 
                 console.log("Grouped rows by the 4th column: ", groupedRows); // Debug: Check grouped rows
 
                 Object.keys(groupedRows).forEach(garden => {
                     const gardenHeader = document.createElement('h3');
                     gardenHeader.textContent = `Garden: ${garden}`;
-                    
-                    const sendEmailBtn = document.createElement('button');
-                    sendEmailBtn.textContent = `Send Email for ${garden}`;
-                    sendEmailBtn.onclick = () => sendEmail(garden, groupedRows[garden]);
-                
                     tableContainer.appendChild(gardenHeader);
-                    tableContainer.appendChild(sendEmailBtn);
-                
+
                     const table = createTable(headers, groupedRows[garden]);
                     tableContainer.appendChild(table);
                 });
@@ -133,55 +127,18 @@ document.addEventListener('DOMContentLoaded', function () {
         const tables = document.querySelectorAll('table');
         tables.forEach(table => {
             const headerCells = table.querySelectorAll('th');
-    
+
             // Reset any previously set widths
             headerCells.forEach(cell => cell.style.width = '');
-    
+
             // Calculate and set new widths
             const tableWidth = table.offsetWidth;
             const columnCount = headerCells.length;
             const columnWidth = tableWidth / columnCount;
-    
+
             headerCells.forEach(cell => {
-                cell.style.width = `${columnWidth}px`;  // Using backticks for interpolation
+                cell.style.width = `${columnWidth}px`;
             });
         });
-    }
-    function sendEmail(gardenName, rows) {
-        const tableHTML = generateTableHTML(rows);
-    
-        const emailData = {
-            gardenName: gardenName,
-            tableHTML: tableHTML
-        };
-    
-        fetch('send_email.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(emailData)
-        }).then(response => response.json()).then(data => {
-            if (data.success) {
-                alert(`Email sent for ${gardenName}`);
-            } else {
-                alert(`Failed to send email: ${data.message}`);
-            }
-        }).catch(err => {
-            console.error("Error sending email: ", err);
-        });
-    }
-    
-    function generateTableHTML(rows) {
-        let tableHTML = "<table border='1'>";
-        rows.forEach(row => {
-            tableHTML += "<tr>";
-            row.forEach(cell => {
-                tableHTML += `<td>${cell}</td>`;
-            });
-            tableHTML += "</tr>";
-        });
-        tableHTML += "</table>";
-        return tableHTML;
     }
 });

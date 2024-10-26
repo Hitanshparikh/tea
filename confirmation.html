@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Upload & Filter</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        #uploadForm {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .file-upload-label {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .file-upload-label:hover {
+            background-color: #2980b9;
+        }
+        button {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #27ae60;
+        }
+        #filterSection {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        #filterOptions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .filter-checkbox {
+            display: flex;
+            align-items: center;
+        }
+        #tableSection {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .group-header {
+            background-color: #e8f5e9;
+            font-weight: bold;
+        }
+        .group-gap {
+            height: 20px;
+        }
+        @media (max-width: 768px) {
+            #uploadForm, #filterSection {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            button, .file-upload-label {
+                margin: 5px 0;
+                width: 100%;
+            }
+        }
+        .logout-btn {
+            background-color: red; /* Red background */
+            color: white; /* White text */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .logout-btn:hover {
+            background-color: darkred; /* Darker red on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Excel Upload & Filter For Confirmation Intimation</h1>
+        <form id="uploadForm" enctype="multipart/form-data" method="POST" action="upload.php">
+            <label for="excelFile" class="file-upload-label">Choose Excel File</label>
+            <input type="file" name="excelFile" id="excelFile" accept=".xlsx, .xls" required />
+            <button type="submit">Upload</button>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </form>
+        
+        <div id="filterSection" style="display:none;">
+            <h2>Select Columns to Display</h2>
+            <div id="filterOptions"></div>
+            <button id="applyFilter">Apply Filter</button>
+            <button id="sendEmail">Send Email</button>
+            <button id="previewEmail">Preview Email</button>
+        </div>
+
+        <div id="tableSection">
+            <h2>Excel Data</h2>
+            <div class="table-container">
+                <table id="excelTable">
+                    <thead id="tableHead"></thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+
+    <script>
+        function logout() {
+            // Clear the login status
+            localStorage.removeItem('loggedIn');
+            // Redirect to login page
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <script>
+        // Check if the user is logged in
+        const isLoggedIn = localStorage.getItem('loggedIn');
+    
+        // If not logged in, redirect to login.html
+        if (!isLoggedIn) {
+            window.location.href = 'login.html';
+        }
+
+        // Logout function to clear login status and redirect to login page
+        function logout() {
+            localStorage.removeItem('loggedIn');
+            window.location.href = 'login.html';
+        }
+    </script>
+    <script src="script1.js"></script>
+</body>
+</html>

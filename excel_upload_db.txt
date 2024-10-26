@@ -1,0 +1,9 @@
+CREATE TABLE uploaded_data (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    uid VARCHAR(255),
+    col1 VARCHAR(255),
+    col2 VARCHAR(255),
+    col3 VARCHAR(255),
+    col4 VARCHAR(255),
+    col5 VARCHAR(255)
+);
