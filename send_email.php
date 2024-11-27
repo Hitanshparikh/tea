@@ -22,17 +22,17 @@ try {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com'; // Set your SMTP server
     $mail->SMTPAuth = true;
-    $mail->Username = 'hiviz2024@gmail.com'; // Your email address
-    $mail->Password = 'vyui cniu fqhb blpq'; // Your email password
+    $mail->Username = 'email'; // Your email address
+    $mail->Password = 'App password here'; // Your email password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 
     // Recipients
-    $mail->setFrom('hiviz2024@gmail.com', 'Gautam Enterprise');
-    $mail->addAddress('hitanshpparikh@gmail.com');
-    $mail->addCC('hitanshpppparikh@gmail.com');
-    $mail->addCC('techtitan2005@gmail.com');
-    $mail->addCC('Kushal.desaiofficial@gmail.com');
+    $mail->setFrom('email', 'Name');
+    $mail->addAddress('email1');
+    $mail->addCC('email2');
+    $mail->addCC('email3');
+    $mail->addCC('email4');
 
     // Content
     $mail->isHTML(true);
